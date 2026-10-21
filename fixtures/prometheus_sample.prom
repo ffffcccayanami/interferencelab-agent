@@ -1,0 +1,20 @@
+# 合成样例：vLLM 风格的 Prometheus 文本（不是真实抓取）
+# HELP vllm:num_requests_running Number of requests currently running.
+# TYPE vllm:num_requests_running gauge
+vllm:num_requests_running{model="example-awq-4bit"} 4
+# HELP vllm:gpu_cache_usage_perc GPU KV-cache usage.
+# TYPE vllm:gpu_cache_usage_perc gauge
+vllm:gpu_cache_usage_perc{model="example-awq-4bit"} 0.42
+# HELP vllm:prefix_cache_hit_rate prefix cache hit rate.
+# TYPE vllm:prefix_cache_hit_rate gauge
+vllm:prefix_cache_hit_rate{model="example-awq-4bit"} 0.61
+# HELP vllm:time_to_first_token_seconds_bucket TTFT histogram.
+# TYPE vllm:time_to_first_token_seconds_bucket histogram
+vllm:time_to_first_token_seconds_bucket{model="example-awq-4bit",le="0.05"} 2
+vllm:time_to_first_token_seconds_bucket{model="example-awq-4bit",le="0.1"} 6
+vllm:time_to_first_token_seconds_bucket{model="example-awq-4bit",le="0.2"} 12
+vllm:time_to_first_token_seconds_bucket{model="example-awq-4bit",le="0.3"} 16
+vllm:time_to_first_token_seconds_bucket{model="example-awq-4bit",le="0.5"} 19
+vllm:time_to_first_token_seconds_bucket{model="example-awq-4bit",le="+Inf"} 20
+vllm:time_to_first_token_seconds_sum{model="example-awq-4bit"} 3.4
+vllm:time_to_first_token_seconds_count{model="example-awq-4bit"} 20
