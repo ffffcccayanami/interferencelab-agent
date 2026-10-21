@@ -1,0 +1,19 @@
+title = "inferencelab-agent"
+
+[extend]
+useDefault = true
+
+# 占位符与示例文件不告警；真实密钥仍然会被默认规则与扩展规则捕获。
+[[allowlists]]
+description = "占位符、示例与文档中的脱敏片段"
+paths = [
+  '''\.env\.example$''',
+  '''(^|/)fixtures/''',
+  '''(^|/)docs/''',
+]
+regexes = [
+  '''YOUR_[A-Z0-9_]+''',
+  '''your-[a-z0-9-]+''',
+  '''\$\{[A-Z0-9_]+\}''',
+  '''YOUR_SECRET_HERE''',
+]
