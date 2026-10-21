@@ -29,9 +29,9 @@ copy .env.example .env
 编辑 `.env`，最少填三项（以 DeepSeek 为例）：
 
 ```dotenv
-LLM_PROFILE=deepseek
-LLM_MODEL_ID=deepseek-chat
-LLM_API_KEY=sk-xxxx
+LLM_PROFILE=LLM_MODEL
+LLM_MODEL_ID=YOUR_LLM_MODEL
+LLM_API_KEY=YOUR_API_KEY
 ```
 
 > 本地 vLLM/Ollama 不需要 key，用 `LLM_PROFILE=vllm` / `ollama` 即可；没有模型也能跑（`LLM_ENABLED=false`，只是不生成模型解释）。
@@ -78,9 +78,9 @@ npm run dev            # http://127.0.0.1:5175，/api 已代理到 8010
 |---|---|---|
 | `LLM_PROFILE` | 部署预设，自动补 base_url/鉴权/健康路径/默认模型 | `deepseek`、`vllm`、`anthropic`、`gemini` |
 | `LLM_PROVIDER` | 传输层，`auto` 由预设推导 | `openai` / `anthropic` / `gemini` |
-| `LLM_MODEL_ID` | 模型 id，必须与服务端 `/models` 一致 | `deepseek-chat` |
-| `LLM_BASE_URL` | 显式端点（覆盖预设） | `https://api.deepseek.com` |
-| `LLM_API_KEY` | 仅后端读取，前端永不可见 | `sk-...` |
+| `LLM_MODEL_ID` | 模型 id，必须与服务端 `/models` 一致 | `YOUR_LLM_MODEL` |
+| `LLM_BASE_URL` | 显式端点（覆盖预设） | `YOUR_LLM_BASE_URL` |
+| `LLM_API_KEY` | 仅后端读取，前端永不可见 | `...` |
 | `LLM_AUTH_MODE` | `auto` / `bearer` / `none` / `x-api-key` / `query` | `auto` |
 | `LLM_DEPLOYMENT` | 展示用：`auto` / `local` / `tunnel` / `cloud` | `auto` |
 | `LLM_MAX_OUTPUT_TOKENS` | 单次输出上限（推理模型思考也占预算） | `2048` |
@@ -104,12 +104,6 @@ npm run dev            # http://127.0.0.1:5175，/api 已代理到 8010
 
 判据语义、基线与回归规则见 **[docs/EVALUATION.md](docs/EVALUATION.md)**。
 
-### 安全
-
-- `.env` 已在 `.gitignore`；`.env.example` 只保留占位符；
-- 预提交钩子扫描暂存区，CI 用 gitleaks 再扫一遍；
-- `/api/meta`、`/api/llm/health` 只返回 `host:port`、掩码指纹与布尔，不返回密钥；
-- 轮换与泄漏处置见 **[docs/KEY_ROTATION.md](docs/KEY_ROTATION.md)**。
 
 ## 主要功能
 
